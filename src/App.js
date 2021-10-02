@@ -47,12 +47,12 @@ const theme = {
 }
 
 function App() {
-  useEffect(() => {
-    const user = localStorage.getItem(
-      'firebase:authUser:AIzaSyAAPJPUNxcLTCh_sFku4njAjh07v1zg-LQ:[DEFAULT]'
-    )
-    console.log('user', JSON.parse(user).email)
-  })
+  // useEffect(() => {
+  //   const user = localStorage.getItem(
+  //     'firebase:authUser:AIzaSyAAPJPUNxcLTCh_sFku4njAjh07v1zg-LQ:[DEFAULT]'
+  //   )
+  //   console.log('user', JSON.parse(user).email)
+  // })
   return (
     <Admin
       loginPage={LoginPage}
