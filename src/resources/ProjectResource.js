@@ -46,7 +46,7 @@ export const ProjectList = (props) => {
       filters={employeeFilters}
     >
       <Datagrid>
-        <TextField source='beneficiaryName' />
+        <TextField source='projectName' />
         <DateField
           source='createdate'
           options={{
@@ -56,8 +56,6 @@ export const ProjectList = (props) => {
             day: 'numeric',
           }}
         />
-        <TextField source='aadharNumber' label='Aadhar Number' />
-        <TextField source='mobileNumber' label='Mobile' />
         <ShowButton label='' />
         <DeleteButton />
       </Datagrid>
