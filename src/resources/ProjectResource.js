@@ -65,6 +65,7 @@ export const ProjectList = (props) => {
 
 const ProjectForm = (props) => (
   <SimpleForm {...props}>
+    <h3>Create </h3>
     <TextInput source='registrationNo' fullWidth validate={[required()]} />
     <TextInput source='projectName' fullWidth validate={[required()]} />
     <NumberInput source='projectCost' fullWidth validate={[required()]} />

@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Admin, Resource, Layout, AppBar } from 'react-admin'
 import LoginPage from './Modules/Login/LoginPage'
 import { createBrowserHistory as createHistory } from 'history'
+import firebase from 'firebase'
+// import { getFirestore } from "firebase/firestore"
 import {
   FirebaseAuthProvider,
   FirebaseDataProvider,
@@ -30,6 +32,7 @@ const firebaseConfig = {
   messagingSenderId: '545836583910',
   appId: '1:545836583910:web:9419198adf86d8437d6427',
 }
+// const admin = require('firebase-admin')
 
 const options = {}
 
@@ -47,45 +50,32 @@ const theme = {
 }
 
 function App() {
-  // useEffect(() => {
-  //   const user = localStorage.getItem(
-  //     'firebase:authUser:AIzaSyAAPJPUNxcLTCh_sFku4njAjh07v1zg-LQ:[DEFAULT]'
-  //   )
-  //   console.log('user', JSON.parse(user).email)
-  // })
-  return (
-    <Admin
-      loginPage={LoginPage}
-      dataProvider={dataProvider}
-      authProvider={authProviderOrig}
-      layout={CustomLayout}
-      title='Mart'
-      history={history}
-      theme={theme}
-    >
-      <Resource
-        name='farmers'
-        options={{ label: 'Farmers' }}
-        list={FarmerList}
-        create={FarmerCreate}
-        edit={FarmerEdit}
-      />
-      <Resource
-        name='employees'
-        options={{ label: 'Employees' }}
-        list={EmployeeList}
-        create={EmployeeCreate}
-        edit={EmployeeEdit}
-      />
-      <Resource
-        name='projects'
-        options={{ label: 'Projects' }}
-        list={ProjectList}
-        create={ProjectCreate}
-        edit={ProjectEdit}
-      />
-    </Admin>
-  )
+  const [loggedUser, setloggedUser] = useState({})
+  useEffect(() => {
+    const db = firebase.firestore()
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        db.collection('users')
+          .where('user', '==', user.email)
+          .get()
+          .then((querySnapshot) => {
+            if (querySnapshot.size > 0) {
+              querySnapshot.forEach((snapshot) => {
+                let userData = snapshot.data()
+                setloggedUser({ role: userData.role, email: userData.user })
+              })
+            } else {
+              db.collection('users')
+                .add({ user: user.email, role: 'employee' })
+                .then((res) =>
+                  setloggedUser({ user: user.email, role: 'employee' })
+                )
+            }
+          })
+      }
+    })
+  }, [])
+  return componentsToRender(loggedUser.role, loggedUser)
 }
 const CustomLayout = (props) => <Layout {...props} appBar={CustomAppBar} />
 const CustomAppBar = ({ ...props }) => (
@@ -96,5 +86,77 @@ const CustomAppBar = ({ ...props }) => (
     </IconButton> */}
   </AppBar>
 )
+
+const componentsToRender = (role, loggedUser) => {
+  if (role === 'admin') {
+    return (
+      <Admin
+        loginPage={LoginPage}
+        dataProvider={dataProvider}
+        authProvider={authProviderOrig}
+        layout={CustomLayout}
+        title='SargujaMart'
+        history={history}
+        theme={theme}
+      >
+        <Resource
+          name='employees'
+          options={{ label: 'Employees' }}
+          list={EmployeeList}
+          create={EmployeeCreate}
+          edit={EmployeeEdit}
+        />
+        <Resource
+          name='farmers'
+          options={{ label: 'Farmers' }}
+          list={FarmerList}
+          create={FarmerCreate}
+          edit={FarmerEdit}
+        />
+        <Resource
+          name='projects'
+          options={{ label: 'Projects' }}
+          list={ProjectList}
+          create={ProjectCreate}
+          edit={ProjectEdit}
+        />
+      </Admin>
+    )
+  } else {
+    return (
+      <Admin
+        loginPage={LoginPage}
+        dataProvider={dataProvider}
+        authProvider={authProviderOrig}
+        layout={CustomLayout}
+        title='SargujaMart'
+        history={history}
+        theme={theme}
+      >
+        <Resource
+          name='employees'
+          options={{ label: 'Employees' }}
+          list={EmployeeList}
+          create={EmployeeCreate}
+          edit={EmployeeEdit}
+        />
+        <Resource
+          name='farmers'
+          options={{ label: 'Farmers' }}
+          list={FarmerList}
+          create={FarmerCreate}
+          edit={FarmerEdit}
+        />
+        <Resource
+          name='projects'
+          options={{ label: 'Projects' }}
+          list={ProjectList}
+          create={ProjectCreate}
+          edit={ProjectEdit}
+        />
+      </Admin>
+    )
+  }
+}
 
 export default App

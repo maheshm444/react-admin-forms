@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   List,
   Datagrid,
@@ -21,6 +21,7 @@ import {
   ImageField,
 } from 'react-admin'
 
+import firebase from 'firebase'
 const farmerFilters = [
   <TextInput source='mobileNumber' label='Search for Farmers' alwaysOn />,
 ]
@@ -42,11 +43,31 @@ export const FarmerEdit = (props) => {
 }
 
 export const FarmerList = (props) => {
+  const [employeeUser, setEmployeeUser] = useState('')
+  const [employeeRole, setEmployeeRole] = useState('')
+  const db = firebase.firestore()
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      db.collection('users')
+        .where('user', '==', user.email)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((snapshot) => {
+              let userData = snapshot.data()
+              console.log('userData', userData)
+              setEmployeeRole(userData.role)
+            })
+          }
+        })
+    }
+    setEmployeeUser(user.email)
+  })
   return (
     <List
       {...props}
       pagination={<Pagination rowsPerPageOptions={[10, 20, 50]} perPage={30} />}
-      filters={farmerFilters}
+      filter={{ createdby: employeeUser }}
     >
       <Datagrid>
         <ImageField source='pictures.src' label='Farmer Image' />

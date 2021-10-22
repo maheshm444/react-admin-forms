@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   List,
   Datagrid,
@@ -19,6 +19,8 @@ import {
   RadioButtonGroupInput,
   SimpleFormIterator,
 } from 'react-admin'
+
+import firebase from 'firebase'
 
 const farmerFilters = [
   <TextInput source='mobileNumber' label='Search for Employees' alwaysOn />,
@@ -41,11 +43,19 @@ export const EmployeeEdit = (props) => {
 }
 
 export const EmployeeList = (props) => {
+  let employeeUser = ''
+  firebase.auth().onAuthStateChanged((user) => {
+    getuser(user)
+  })
+  function getuser(user) {
+    employeeUser = user
+    // console.log('employeeUser', employeeUser)
+  }
   return (
     <List
       {...props}
       pagination={<Pagination rowsPerPageOptions={[10, 20, 50]} perPage={30} />}
-      filters={farmerFilters}
+      // filters={farmerFilters}
     >
       <Datagrid>
         <ImageField source='pictures.src' label='Employee Image' />
@@ -73,6 +83,7 @@ const EmployeeForm = (props) => (
     <ImageInput source='pictures' label='Employee pictures' accept='image/*'>
       <ImageField source='src' title='title' />
     </ImageInput>
+    <TextInput source='employee' fullWidth validate={[required()]} />
     <TextInput source='name' fullWidth validate={[required()]} />
     <TextInput source='fatherName' fullWidth validate={[required()]} />
     <TextInput source='husbandName/spouseName' fullWidth />

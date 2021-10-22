@@ -23,5 +23,8 @@ reportWebVitals()
 // }
 // request.onsuccess = function (event) {
 //   // Do something with request.result!
-//   console.log('test', event)
 // }
+
+// 1. Add drop down for projects
+// 2. Add employee speficic farmers
+// 3. country and state drop down
