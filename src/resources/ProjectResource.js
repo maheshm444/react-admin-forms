@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   List,
   Datagrid,
@@ -17,7 +17,7 @@ import {
   SelectInput,
   RadioButtonGroupInput,
 } from 'react-admin'
-
+import firebase from 'firebase'
 const employeeFilters = [
   <TextInput source='mobileNumber' label='Search for Projects' alwaysOn />,
 ]
@@ -39,11 +39,33 @@ export const ProjectEdit = (props) => {
 }
 
 export const ProjectList = (props) => {
+  const [employeeUser, setEmployeeUser] = useState('')
+  const [employeeRole, setEmployeeRole] = useState('')
+  const db = firebase.firestore()
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      db.collection('users')
+        .where('user', '==', user.email)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((snapshot) => {
+              let userData = snapshot.data()
+              console.log('userData', userData)
+              setEmployeeRole(userData.role)
+            })
+          }
+        })
+    }
+    setEmployeeUser(user.email)
+    // console.log('employeeRole', employeeRole)
+  })
   return (
     <List
       {...props}
       pagination={<Pagination rowsPerPageOptions={[10, 20, 50]} perPage={30} />}
       filters={employeeFilters}
+      filter={{ createdby: employeeRole!=='admin' ? employeeUser : ''}}
     >
       <Datagrid>
         <TextField source='projectName' />

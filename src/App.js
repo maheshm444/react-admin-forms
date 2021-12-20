@@ -19,6 +19,11 @@ import {
   EmployeeList,
 } from './resources/EmployeeResource'
 import {
+  NewEmployeeCreate,
+  NewEmployeeEdit,
+  NewEmployeeList,
+} from './resources/NewEmployeeResource'
+import {
   ProjectCreate,
   ProjectEdit,
   ProjectList,
@@ -100,12 +105,46 @@ const componentsToRender = (role, loggedUser) => {
         theme={theme}
       >
         <Resource
+          name='new_employees'
+          options={{ label: 'Create New Employees' }}
+          list={NewEmployeeList}
+          create={NewEmployeeCreate}
+          edit={NewEmployeeEdit}
+        />
+        <Resource
           name='employees'
           options={{ label: 'Employees' }}
           list={EmployeeList}
           create={EmployeeCreate}
           edit={EmployeeEdit}
         />
+        <Resource
+          name='farmers'
+          options={{ label: 'Farmers' }}
+          list={FarmerList}
+          create={FarmerCreate}
+          edit={FarmerEdit}
+        />
+        <Resource
+          name='projects'
+          options={{ label: 'Projects' }}
+          list={ProjectList}
+          create={ProjectCreate}
+          edit={ProjectEdit}
+        />
+      </Admin>
+    )
+  } else if (role==='employee') {
+    return (
+      <Admin
+        loginPage={LoginPage}
+        dataProvider={dataProvider}
+        authProvider={authProviderOrig}
+        layout={CustomLayout}
+        title='SargujaMart Employee'
+        history={history}
+        theme={theme}
+      >
         <Resource
           name='farmers'
           options={{ label: 'Farmers' }}
@@ -133,13 +172,6 @@ const componentsToRender = (role, loggedUser) => {
         history={history}
         theme={theme}
       >
-        <Resource
-          name='employees'
-          options={{ label: 'Employees' }}
-          list={EmployeeList}
-          create={EmployeeCreate}
-          edit={EmployeeEdit}
-        />
         <Resource
           name='farmers'
           options={{ label: 'Farmers' }}

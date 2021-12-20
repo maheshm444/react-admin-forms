@@ -62,12 +62,13 @@ export const FarmerList = (props) => {
         })
     }
     setEmployeeUser(user.email)
+    // console.log('employeeRole', employeeRole)
   })
   return (
-    <List
+<List
       {...props}
       pagination={<Pagination rowsPerPageOptions={[10, 20, 50]} perPage={30} />}
-      filter={{ createdby: employeeUser }}
+      filter={{ createdby: employeeRole!=='admin' ? employeeUser : ''}}
     >
       <Datagrid>
         <ImageField source='pictures.src' label='Farmer Image' />
