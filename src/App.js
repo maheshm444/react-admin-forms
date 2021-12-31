@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Admin, Resource, Layout, AppBar } from 'react-admin'
+import { Admin, Resource, Layout, AppBar, Title } from 'react-admin'
 import LoginPage from './Modules/Login/LoginPage'
 import { createBrowserHistory as createHistory } from 'history'
 import firebase from 'firebase'
@@ -100,17 +100,18 @@ const componentsToRender = (role, loggedUser) => {
         dataProvider={dataProvider}
         authProvider={authProviderOrig}
         layout={CustomLayout}
-        title='SargujaMart'
         history={history}
         theme={theme}
+        title={'Sarguja Mart'}
       >
-        <Resource
+      <Title title={(loggedUser) && `Logged in as ${loggedUser.role.toUpperCase()} (${loggedUser.email}) SargujaMart - `} />
+        {/* <Resource
           name='new_employees'
           options={{ label: 'Create New Employees' }}
           list={NewEmployeeList}
           create={NewEmployeeCreate}
           edit={NewEmployeeEdit}
-        />
+        /> */}
         <Resource
           name='employees'
           options={{ label: 'Employees' }}
@@ -141,10 +142,10 @@ const componentsToRender = (role, loggedUser) => {
         dataProvider={dataProvider}
         authProvider={authProviderOrig}
         layout={CustomLayout}
-        title='SargujaMart Employee'
         history={history}
         theme={theme}
       >
+        <Title title={loggedUser && `Logged in as ${loggedUser.role.toUpperCase()} (${loggedUser.email}) SargujaMart - `} />
         <Resource
           name='farmers'
           options={{ label: 'Farmers' }}
@@ -168,7 +169,6 @@ const componentsToRender = (role, loggedUser) => {
         dataProvider={dataProvider}
         authProvider={authProviderOrig}
         layout={CustomLayout}
-        title='SargujaMart'
         history={history}
         theme={theme}
       >

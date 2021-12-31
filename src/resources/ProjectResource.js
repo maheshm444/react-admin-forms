@@ -85,9 +85,30 @@ export const ProjectList = (props) => {
   )
 }
 
-const ProjectForm = (props) => (
-  <SimpleForm {...props}>
-    <h3>Create </h3>
+const ProjectForm = (props) => {
+  const [employeeUser, setEmployeeUser] = useState('')
+  const [employeeRole, setEmployeeRole] = useState('')
+  const db = firebase.firestore()
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      db.collection('users')
+        .where('user', '==', user.email)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((snapshot) => {
+              let userData = snapshot.data()
+              console.log('userData', userData)
+              setEmployeeRole(userData.role)
+            })
+          }
+        })
+    }
+    setEmployeeUser(user.email)
+    // console.log('employeeRole', employeeRole)
+  })
+  return (<SimpleForm {...props}>
+    <h3>Create / Edit Project</h3>
     <TextInput source='registrationNo' fullWidth validate={[required()]} />
     <TextInput source='projectName' fullWidth validate={[required()]} />
     <NumberInput source='projectCost' fullWidth validate={[required()]} />
@@ -96,6 +117,7 @@ const ProjectForm = (props) => (
       label='Select Beneficiary'
       source='beneficiaryId'
       reference='farmers'
+      filter={{ createdby: employeeRole!=='admin' ? employeeUser : ''}}
       fullWidth
     >
       <SelectInput optionText='beneficiaryName' />
@@ -264,14 +286,12 @@ const ProjectForm = (props) => (
     <TextInput
       source='witness1'
       fullWidth
-      validate={[required()]}
       label='Witness 1'
     />
     <TextInput
       source='witness2'
       fullWidth
-      validate={[required()]}
       label='Witness 2'
     />
-  </SimpleForm>
-)
+  </SimpleForm>)
+}

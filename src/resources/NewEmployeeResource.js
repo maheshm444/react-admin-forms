@@ -31,6 +31,25 @@ const farmerFilters = [
 ]
 
 export const NewEmployeeCreate = (props) => {
+  const [EmployeeCounter, setEmployeeCounter] = useState('')
+  const db = firebase.firestore()
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      db.collection('employeeCounter')
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((snapshot) => {
+              let countData = snapshot.data()
+              console.log('countData', countData)
+              setEmployeeCounter(countData)
+            })
+          }
+        })
+    }
+    setEmployeeCounter(2)
+    // console.log('employeeRole', employeeRole)
+  })
   return (
     <Create title='Create a Employee' {...props}>
       <NewEmployeeForm />

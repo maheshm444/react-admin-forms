@@ -18,7 +18,7 @@ const db = admin.firestore();
 //   response.send("Hello from Firebase!");
 // });
 
-exports.onUserCreate = functions.firestore.document("new_employees/{id}")
+exports.onUserCreate = functions.firestore.document("employees/{id}")
     .onCreate(async (snap, context) => {
       const values = snap.data();
       const email = values.email;
@@ -38,4 +38,14 @@ exports.onUserCreate = functions.firestore.document("new_employees/{id}")
           });
       await db.collection("users")
           .add({user: values.email, role: "employee"});
+      await db.collection("employeeCounter")
+          .set({employeeCount: values.employeeCount+1});
     });
+
+// Counter
+// exports.onUserCounterCreate = functions.firestore.document("employees/{id}")
+//     .onCreate(async (snap, context) => {
+//       const values = snap.data();
+//       db.collection("employeeCounter")
+//           .set({employeeCount: values.employeeCount+1});
+//     });
