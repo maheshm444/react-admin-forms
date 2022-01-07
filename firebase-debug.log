@@ -1,0 +1,100 @@
+[debug] [2022-01-07T10:00:10.887Z] ----------------------------------------------------------------------
+[debug] [2022-01-07T10:00:10.890Z] Command:       /usr/local/bin/firebase /Users/mravi/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase deploy --only functions
+[debug] [2022-01-07T10:00:10.890Z] CLI Version:   9.20.0
+[debug] [2022-01-07T10:00:10.890Z] Platform:      darwin
+[debug] [2022-01-07T10:00:10.890Z] Node Version:  v12.18.1
+[debug] [2022-01-07T10:00:10.891Z] Time:          Fri Jan 07 2022 15:30:10 GMT+0530 (India Standard Time)
+[debug] [2022-01-07T10:00:10.891Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-01-07T10:00:10.893Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-01-07T10:00:10.965Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-01-07T10:00:10.965Z] > authorizing via signed-in user (sargujamart@gmail.com)
+[debug] [2022-01-07T10:00:10.965Z] [iam] checking project sargujamart-form for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-01-07T10:00:10.967Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-01-07T10:00:10.967Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-01-07T10:00:11.881Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","date":"Fri, 07 Jan 2022 10:00:11 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-07T10:00:11.942Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sargujamart-form:testIamPermissions  
+ {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-01-07T10:00:12.118Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2022-01-07T10:00:12.119Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2022-01-07T10:00:12.957Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 07 Jan 2022 10:00:12 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=129","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-07T10:00:12.957Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/sargujamart-form/serviceAccounts/sargujamart-form@appspot.gserviceaccount.com:testIamPermissions  
+ {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-01-07T10:00:13.918Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 07 Jan 2022 10:00:13 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Deploying to 'sargujamart-form'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script. 
+[debug] [2022-01-07T10:00:18.312Z] Validating nodejs source
+[debug] [2022-01-07T10:00:21.768Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "14"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "@firebase/auth": "^0.19.4",
+    "babel-eslint": "^10.1.0",
+    "firebase": "^9.6.1",
+    "firebase-admin": "^9.8.0",
+    "firebase-functions": "^3.14.1"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.16.5",
+    "eslint": "^7.6.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2022-01-07T10:00:21.768Z] Building nodejs source
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2022-01-07T10:00:21.769Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/sargujamart-form/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2022-01-07T10:00:21.770Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/sargujamart-form/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2022-01-07T10:00:21.770Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/sargujamart-form/services/cloudbuild.googleapis.com  
+ 
+[debug] [2022-01-07T10:00:23.017Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 07 Jan 2022 10:00:22 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-07T10:00:23.402Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 07 Jan 2022 10:00:22 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2022-01-07T10:00:23.431Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 07 Jan 2022 10:00:22 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2022-01-07T10:00:23.432Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sargujamart-form/adminSdkConfig  
+ 
+[debug] [2022-01-07T10:00:24.567Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 07 Jan 2022 10:00:24 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-07T10:00:24.568Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/sargujamart-form/configs  
+ 
+[debug] [2022-01-07T10:00:28.320Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 07 Jan 2022 10:00:28 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-07T10:00:28.326Z] Analyzing nodejs backend spec
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged functions (44.34 KB) for uploading 
+[debug] [2022-01-07T10:00:28.907Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/sargujamart-form/locations/-/functions  
+ 
+[debug] [2022-01-07T10:00:30.343Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 07 Jan 2022 10:00:30 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-07T10:00:30.345Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/sargujamart-form/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2022-01-07T10:00:31.624Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 07 Jan 2022 10:00:31 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-07T10:00:31.625Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-8a0340c8-a11a-4288-a051-d82830cfff83/97b4a08c-1571-4145-a61f-60e309aaa5f8.zip?GoogleAccessId=service-545836583910@gcf-admin-robot.iam.gserviceaccount.com&Expires=1641551431&Signature=EfJclTvvOOD49K%2Fc7M6TwSgSl18u%2FOCZ06Z2F1%2BAfV67vn9RJLvecCnB4Q9gi5AS2Y0L%2FVQPevCi54Q1Uz5tDa1Xh1uzwhWPZuDli6QWwXyXoLFVPurJ30VP%2FzR5sRfr0FnUsf76wy4T1Yt%2FExJWf5U6Q7C9szSnrYUaiQgkvdfmnZzYhbCuR7pBb7NZEFg4V2KUn8NVyD3KFm1cs17u10OXqjZ6O8LxPDKd1RAczQAwyqalZfxKKavz9ED9ElYgV9xpYWIMsJTKxDRL0LWajqUYvAw%2BLYZ693eJ0UztOE0uXEitrc8G%2FHsPw%2FseU3m1lJ3HATyGoXtGGzHXehASCw%3D%3D  
+ <request body omitted>
+[debug] [2022-01-07T10:00:34.275Z] <<< HTTP RESPONSE 200 {"x-guploader-uploadid":"ADPycdsJF4IM05AezaqJ7YqDJCDo8-98M9vjOjkJiraejylVQLM_p5aLhb-yIP57KvmaBEbhb6pgF4kIBl8JoyYvbsFDbKNrDw","etag":"\"b356304242b4d23491a356fee4c01e5e\"","x-goog-generation":"1641549634193537","x-goog-metageneration":"1","x-goog-hash":"crc32c=1lGm7Q==, md5=s1YwQkK00jSRo1b+5MAeXg==","x-goog-stored-content-length":"45407","x-goog-stored-content-encoding":"identity","vary":"Origin","content-length":"0","date":"Fri, 07 Jan 2022 10:00:34 GMT","server":"UploadServer","content-type":"text/html; charset=UTF-8","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""}
+[info] ✔  functions: functions folder uploaded successfully 
+[info] 
+The following functions are found in your project but do not exist in your local source code:
+	helloWorld(us-central1)
+
+If you are renaming a function or changing its region, it is recommended that you create the new function first before deleting the old one to prevent event loss. For more info, visit https://firebase.google.com/docs/functions/manage-functions#modify
+

@@ -927,7 +927,7 @@ const EmployeeForm = (props) => {
     </ImageInput>
     <TextInput source='email' fullWidth validate={[required()]} />
     <TextInput source='password' fullWidth validate={[required()]} />
-    <TextInput source='employee' fullWidth validate={[required()]} />
+    {/* <TextInput source='employee' fullWidth validate={[required()]} /> */}
     <TextInput source='name' fullWidth validate={[required()]} />
     <TextInput source='fatherName' fullWidth validate={[required()]} />
     <TextInput source='husbandNameORspouseName' label='husbandName / spouseName' fullWidth />
@@ -940,7 +940,8 @@ const EmployeeForm = (props) => {
     <TextInput source='aadharNumber' fullWidth validate={[required()]} />
     <TextInput source='pan' fullWidth validate={[required()]} />
     <TextInput source='accountNumber' fullWidth validate={[required()]} />
-    <TextInput source='employeeid' fullWidth validate={[required()]} initialValue={formattedNumber}/>
+    {/* <TextInput source='employeeid' fullWidth validate={[required()]} initialValue={formattedNumber}/> */}
+    <TextInput source='employeeid' fullWidth validate={[required()]}/>
     <DateInput source='joiningDate' label='Joining Date' fullWidth />
     <h3>Working Place</h3>
     <SelectInput source='state' choices={toChoices(state)} fullWidth/>

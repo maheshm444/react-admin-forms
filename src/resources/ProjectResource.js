@@ -19,7 +19,8 @@ import {
 } from 'react-admin'
 import firebase from 'firebase'
 const employeeFilters = [
-  <TextInput source='mobileNumber' label='Search for Projects' alwaysOn />,
+  <TextInput source='projectName' label='Project Name' alwaysOn />,
+  <TextInput source='mobileNumber' label='Mobile Number' alwaysOn />,
 ]
 
 export const ProjectCreate = (props) => {

@@ -33,6 +33,7 @@ const farmerFilters = [
   <TextInput source='beneficiaryName' label='Farmer Name' alwaysOn/>,
   <TextInput source='state' label='State' alwaysOn/>,
   <TextInput source='district' label='District' alwaysOn/>,
+  <TextInput source='areaManager' label='Area Manager' alwaysOn/>,
 ]
 
 export const FarmerCreate = (props) => {
