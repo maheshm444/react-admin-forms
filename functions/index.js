@@ -39,25 +39,25 @@ exports.onUserCreate = functions.firestore.document("employees/{id}")
       await db.collection("users")
           .add({user: values.email, role: "employee"});
     });
-exports.onUserUpdate = functions.firestore.document("employees/{id}")
-    .onUpdate(async (snap, context) => {
-      const values = snap.data();
-      const email = values.email;
-      const password = values.password;
-      const uid = values.id;
-      admin.auth().updateUser(uid, {email: email, password: password})
-          .then((userCredential) => {
-            db.collection("logging")
-                .add({user: values.email, message: "User updated"});
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            db.collection("logging")
-                .add({user: values.email,
-                  message: `Error Occurred: ${errorCode} - ${errorMessage} `});
-          });
-    });
+// exports.onUserUpdate = functions.firestore.document("employees/{id}")
+//     .onUpdate(async (snap, context) => {
+//       const values = snap.data();
+//       const email = values.email;
+//       const password = values.password;
+//       const uid = values.id;
+//       admin.auth().updateUser(uid, {email: email, password: password})
+//           .then((userCredential) => {
+//             db.collection("logging")
+//                 .add({user: values.email, message: "User updated"});
+//           })
+//           .catch((error) => {
+//             const errorCode = error.code;
+//             const errorMessage = error.message;
+//             db.collection("logging")
+//                 .add({user: values.email,
+//                 message: `Error Occurred: ${errorCode} - ${errorMessage} `});
+//           });
+//     });
 
 // Counter
 // exports.onUserCounterCreate = functions.firestore.document("employees/{id}")
