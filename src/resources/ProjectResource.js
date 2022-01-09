@@ -52,7 +52,6 @@ export const ProjectList = (props) => {
           if (querySnapshot.size > 0) {
             querySnapshot.forEach((snapshot) => {
               let userData = snapshot.data()
-              console.log('userData', userData)
               setEmployeeRole(userData.role)
             })
           }
@@ -99,7 +98,6 @@ const ProjectForm = (props) => {
           if (querySnapshot.size > 0) {
             querySnapshot.forEach((snapshot) => {
               let userData = snapshot.data()
-              console.log('userData', userData)
               setEmployeeRole(userData.role)
             })
           }

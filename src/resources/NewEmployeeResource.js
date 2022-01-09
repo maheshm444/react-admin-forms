@@ -41,7 +41,6 @@ export const NewEmployeeCreate = (props) => {
           if (querySnapshot.size > 0) {
             querySnapshot.forEach((snapshot) => {
               let countData = snapshot.data()
-              console.log('countData', countData)
               setEmployeeCounter(countData)
             })
           }

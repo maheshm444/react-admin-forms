@@ -65,7 +65,6 @@ export const FarmerList = (props) => {
           if (querySnapshot.size > 0) {
             querySnapshot.forEach((snapshot) => {
               let userData = snapshot.data()
-              console.log('userData', userData)
               setEmployeeRole(userData.role)
             })
           }
@@ -943,8 +942,8 @@ const FarmerForm = (props) => (
     <TextInput source='ifscNumber' fullWidth />
     <TextInput source='bankName' fullWidth />
     <TextInput source='branch' fullWidth />
-    <TextInput source='areaManager' fullWidth />
-    <DateInput source='dob' label='Date of Birth' fullWidth />
+    <TextInput source='areaManager' fullWidth validate={[required()]}/>
+    <DateInput source='dob' label='Date of Birth' fullWidth validate={[required()]} />
     <NumberInput source='age' fullWidth min={18} validate={[required()]} />
     <RadioButtonGroupInput
       source='gender'
@@ -957,8 +956,8 @@ const FarmerForm = (props) => (
     <TextInput source='caste' fullWidth validate={[required()]} />
     <TextInput source='category' fullWidth validate={[required()]} />
     <TextInput source='nationality' fullWidth validate={[required()]} />
-    <TextInput source='emailid' fullWidth validate={[required()]} />
-    <TextInput source='subject' fullWidth validate={[required()]} />
+    <TextInput source='emailid' fullWidth />
+    <TextInput source='subject' fullWidth  />
     <SelectInput source='state' choices={toChoices(state)} fullWidth/>
     <CityInput source='district' label='District' fullWidth/>
     <TextInput source='completeAddress' fullWidth validate={[required()]} />
