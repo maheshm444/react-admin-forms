@@ -19,6 +19,8 @@ import {
   RadioButtonGroupInput,
   SimpleFormIterator,
   SelectInput,
+  minLength,
+  maxLength,
   ReferenceInput
 
 } from 'react-admin'
@@ -30,6 +32,8 @@ const employeeFilters = [
   <TextInput source='mobileNumber' label='Mobile Number search' alwaysOn />,
   <TextInput source='aadharNumber' label='Aadhar search' alwaysOn />,
   <TextInput source='name' label='Search by Name' alwaysOn />,
+  <TextInput source='state' label='State' alwaysOn/>,
+  <TextInput source='district' label='District' alwaysOn/>,
 ]
 
 export const EmployeeCreate = (props) => {
@@ -905,7 +909,6 @@ const EmployeeForm = (props) => {
           if (querySnapshot.size > 0) {
             querySnapshot.forEach((snapshot) => {
               let countData = snapshot.data()
-              console.log('countData', countData)
               setEmployeeCounter(countData.employeeCount)
             })
           }
@@ -918,8 +921,15 @@ const EmployeeForm = (props) => {
       minimumIntegerDigits: 4,
       useGrouping: false
     })
-    console.log('employeeCounter', formattedNumber)
   // })
+  const mobileNumberValidation = (value, allValues) => {
+    if (value.toString().length< 10) {
+      return 'Mobile number should be minimum 10 characters in length';
+  }
+  }
+  const validateAadhar = [required(), minLength(12), maxLength(12) ]
+  const validateMobileNumber = [required(), mobileNumberValidation ]
+  
   return (
   <SimpleForm {...props}>
     <ImageInput source='pictures' label='Employee pictures' accept='image/*'>
@@ -931,18 +941,19 @@ const EmployeeForm = (props) => {
     <TextInput source='name' fullWidth validate={[required()]} />
     <TextInput source='fatherName' fullWidth validate={[required()]} />
     <TextInput source='husbandNameORspouseName' label='husbandName / spouseName' fullWidth />
-    <DateInput source='dob' label='Date of Birth' fullWidth />
+    <DateInput source='dob' label='Date of Birth' validate={[required()]} fullWidth />
     <TextInput source='qualification' fullWidth validate={[required()]} />
     <TextInput source='post' fullWidth validate={[required()]} />
     <TextInput source='address' fullWidth validate={[required()]} />
     <TextInput source='pincode' fullWidth validate={[required()]} />
-    <TextInput source='mobileNumber' fullWidth validate={[required()]} />
-    <TextInput source='aadharNumber' fullWidth validate={[required()]} />
-    <TextInput source='pan' fullWidth validate={[required()]} />
+    <TextInput source='mobileNumber' fullWidth validate={validateMobileNumber}/>
+    <TextInput source='aadharNumber' fullWidth validate={validateAadhar} />
+    <TextInput source='pan' fullWidth />
     <TextInput source='accountNumber' fullWidth validate={[required()]} />
+    <TextInput source='ifsc' fullWidth />
     {/* <TextInput source='employeeid' fullWidth validate={[required()]} initialValue={formattedNumber}/> */}
-    <TextInput source='employeeid' fullWidth validate={[required()]}/>
-    <DateInput source='joiningDate' label='Joining Date' fullWidth />
+    <TextInput source='employeeid' label='Employee Id' fullWidth validate={[required()]}/>
+    <DateInput source='joiningDate' label='Joining Date' validate={[required()]} fullWidth />
     <h3>Working Place</h3>
     <SelectInput source='state' choices={toChoices(state)} fullWidth/>
     <CityInput source='district' label='District' fullWidth/>
