@@ -16,12 +16,12 @@ import {
   required,
   Pagination,
   DeleteButton,
-  RadioButtonGroupInput,
+  // RadioButtonGroupInput,
   SimpleFormIterator,
   SelectInput,
   minLength,
   maxLength,
-  ReferenceInput
+  // ReferenceInput
 
 } from 'react-admin'
 import { useFormState } from 'react-final-form';
@@ -53,14 +53,14 @@ export const EmployeeEdit = (props) => {
 }
 
 export const EmployeeList = (props) => {
-  let employeeUser = ''
-  firebase.auth().onAuthStateChanged((user) => {
-    getuser(user)
-  })
-  function getuser(user) {
-    employeeUser = user
-    // console.log('employeeUser', employeeUser)
-  }
+  // let employeeUser = ''
+  // firebase.auth().onAuthStateChanged((user) => {
+  //   getuser(user)
+  // })
+  // function getuser(user) {
+  //   employeeUser = user
+  //   // console.log('employeeUser', employeeUser)
+  // }
   return (
     <List
       {...props}
@@ -913,7 +913,7 @@ const EmployeeForm = (props) => {
             })
           }
         })
-      }, [])
+      }, [db])
     // }
     // setEmployeeCounter(2)
     const finalIncrementEmpNo = employeeCounter+1;

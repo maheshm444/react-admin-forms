@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   List,
   Datagrid,
@@ -56,23 +56,26 @@ export const FarmerList = (props) => {
   const [employeeUser, setEmployeeUser] = useState('')
   const [employeeRole, setEmployeeRole] = useState('')
   const db = firebase.firestore()
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      db.collection('users')
-        .where('user', '==', user.email)
-        .get()
-        .then((querySnapshot) => {
-          if (querySnapshot.size > 0) {
-            querySnapshot.forEach((snapshot) => {
-              let userData = snapshot.data()
-              setEmployeeRole(userData.role)
-            })
-          }
-        })
-    }
-    setEmployeeUser(user.email)
-    // console.log('employeeRole', employeeRole)
-  })
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        db.collection('users')
+          .where('user', '==', user.email)
+          .get()
+          .then((querySnapshot) => {
+            if (querySnapshot.size > 0) {
+              querySnapshot.forEach((snapshot) => {
+                let userData = snapshot.data()
+                setEmployeeRole(userData.role)
+              })
+            }
+          })
+      }
+      setEmployeeUser(user.email)
+      // console.log('employeeRole', employeeRole)
+    })
+  }, [])
+
   return (
 <List
       {...props}

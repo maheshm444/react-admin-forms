@@ -18,11 +18,11 @@ import {
   EmployeeEdit,
   EmployeeList,
 } from './resources/EmployeeResource'
-import {
-  NewEmployeeCreate,
-  NewEmployeeEdit,
-  NewEmployeeList,
-} from './resources/NewEmployeeResource'
+// import {
+//   NewEmployeeCreate,
+//   NewEmployeeEdit,
+//   NewEmployeeList,
+// } from './resources/NewEmployeeResource'
 import {
   ProjectCreate,
   ProjectEdit,
